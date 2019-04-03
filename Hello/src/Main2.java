@@ -3,17 +3,25 @@ import java.util.Vector;
 
 import com.sun.org.apache.bcel.internal.generic.IF_ACMPEQ;
 
-public class Main {
-	public static void main(String[] args) throws IOException {
-////////////////////////////////////////////////////////////////
+public class Main2 {
+	static int arrayNumber[] = new int[20];
+	static int index = 0;
+	static Boolean isNumber = true;
+	static long number = 0L;
+	static String realNum = "";
+//	@SuppressWarnings("static-access")
+//	public Main(int arrayNumber[], int index, Boolean isNumber, long number, String realNum) {
+//		this.arrayNumber = arrayNumber;
+//		this.index = index;
+//		this.isNumber = isNumber;
+//		this.number = number;
+//		this.realNum = realNum;
+//	}
+
+	public static void input() throws IOException {// 수학에서 함수 f 와 같은 의미
+//////////////통신라인을 만들어 파라메타로 통신에서 가장 좋은방법은 ㄴ//////////
 /////////////////////// input Buffering/ ///////////////////////
 ////////////////////////////////////////////////////////////////
-		int index = 0;
-		long number = 0;
-		String realNum = "";
-		int arrayNumber[] = new int[20];
-
-		Boolean isNumber = true;
 		int keyvalue = System.in.read();
 		while (!(keyvalue == 0x0D || keyvalue == 0x0A)) {
 			if (index >= 20) {
@@ -29,12 +37,16 @@ public class Main {
 			keyvalue = System.in.read();
 		}
 		keyvalue = System.in.read();
+
+	}
+
+	public static void StringToInt() {
 ////////////////////////////////////////////////////////////////
 /////////////////////// ascii to integer ///////////////////////
 ////////////////////////////////////////////////////////////////
 		if (isNumber) { // number < 2^32
 			for (int i = 0; i < index; i++) {
-				if ((long) (number * 10 + arrayNumber[i] - 48) >= Math.pow(2, 31)) {
+				if ((long) (number * 10) + arrayNumber[i] - 48 >= Math.pow(2, 31)) {
 					for (int j = 0; j < index; j++) {
 						realNum += (char) arrayNumber[j];
 					}
@@ -45,5 +57,10 @@ public class Main {
 				number = (long) (number * 10 + arrayNumber[i] - '0');
 			}
 		}
+	}
+
+	public static void main(String[] args) throws IOException {
+		input();
+		StringToInt();
 	}
 }
