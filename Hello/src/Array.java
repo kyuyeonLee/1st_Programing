@@ -2,26 +2,42 @@ import java.io.IOException;
 
 public class Array {
 
-	public static void main(String[] args) throws IOException {
-		int array[];
-		array = new int[20]; //이름하고 실제 ㅁ메모리가  -> 바인딩
-		boolean isNumber = true; 
-		
-		array[0] = 0; //고유의 이름을 주겟느냐 순서를 주겠느냐
-		
-		int index = 0;
+	// encapsulation
+
+	private int maxLength = 20;
+	private int length;
+	private int array[] = new int[maxLength];
+
+	public boolean input() throws IOException {
+		boolean isNumber = true;
 		int keyvalue = System.in.read();
-		while (!(keyvalue == 0x0D||keyvalue == 0x0A)) {
-			if(!(keyvalue<'0' || keyvalue>'9')) {
+		while (!(keyvalue == 0x0D || keyvalue == 0x0A)) {
+			if (length >= 20) {
+				System.out.println("저장 가능한 Index가 초과됐습니다.");
+				break;
+			}
+			if (keyvalue < '0' || keyvalue > '9') {
 				isNumber = false;
 			}
-			array[index] = keyvalue;
-			index = index +1;
-			keyvalue = System.in.read();//숫자인지 아닌지 판단하려고 array를 잡으라는 것이다.
+			array[length] = keyvalue;
+			length = length + 1;
+			keyvalue = System.in.read();
 		}
-		if (isNumber) {
-			
-		}
+		keyvalue = System.in.read();
+		return isNumber;
 	}
 
+	public int stringToInt() {
+		int number = 0;
+		for (int i = 0; i < length; i++) {
+			if (number * 10L + array[i] - 48 >= Math.pow(2, 31)) {
+				System.out.println("20자를 넘었습니다.");
+				break;
+			} else {
+				number = number * 10 + array[i] - '0';
+			}
+		}
+		System.out.println("number : " + number);
+		return number;
+	}
 }
