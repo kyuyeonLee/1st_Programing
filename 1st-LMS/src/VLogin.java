@@ -8,11 +8,11 @@ public class VLogin {
 		String userId = scanner.next();
 		System.out.print("Password : ");
 		String password = scanner.next();
-		System.out.println(password);
 		
 		scanner.close();
 		
 		CLogin cLogin = new CLogin();
 		boolean result = cLogin.authenticate(userId, password);
 	}
+	
 }
